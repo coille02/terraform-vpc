@@ -18,11 +18,6 @@ variable "create_q_vpc" {
   default     = false
 }
 
-# variable "game_code" {
-#   description = "모듈에서 정의하는 모든 리소스 이름의 prefix"
-#   type        = string
-# }
-
 variable "region" {
   description = "국가코드"
   type        = string
@@ -80,60 +75,6 @@ variable "tags" {
   type        = map(string)
 }
 
-# variable "q_access_key" {
-#   description = "qa_access_key"
-#   type        = string
-#   default     = null
-# }
-
-# variable "q_secret_key" {
-#   description = "qa_secret_key"
-#   type        = string
-#   default     = null
-# }
-
-# variable "q_session_token" {
-#   description = "qa_session_token"
-#   type        = string
-#   default     = null
-# }
-
-# variable "q_region" {
-#   description = "qa region"
-#   type        = string
-#   default     = null
-# }
-
-
-#Peering
-# variable "create_m_q_peering" {
-#   description = "create_m_vpc"
-#   type        = bool
-#   default     = false
-# }
-
-# variable "create_m_r_peering" {
-#   description = "create_m_vpc"
-#   type        = bool
-#   default     = false
-# }
-
-# variable "q_vpc_id" {
-#   description = "qa vpc id"
-#   type        = string
-#   default     = null
-# }
-# variable "m_vpc_id" {
-#   description = "manage vpc id"
-#   type        = string
-#   default     = null
-# }
-# variable "r_vpc_id" {
-#   description = "real vpc id"
-#   type        = string
-#   default     = null
-# }
-
 variable "r_region" {
   description = "real region"
   type        = string
@@ -173,39 +114,6 @@ variable "r_env" {
   type        = string
   default     = "r"
 }
-
-# variable "m_route_table_ids" {
-#   type = list(string)
-# }
-# variable "q_route_table_ids" {
-#   type = list(string)
-# }
-
-# variable "private_route_table_ids" {
-#   type = list(string)
-# }
-
-# variable "public_route_table_ids" {
-#   type = list(string)
-# }
-
-# variable "m_cidr_block" {
-#   description = "manage env"
-#   type        = string
-#   default     = null
-# }
-
-# variable "q_cidr_block" {
-#   description = "manage env"
-#   type        = string
-#   default     = null
-# }
-
-# variable "r_cidr_block" {
-#   description = "manage env"
-#   type        = string
-#   default     = null
-# }
 
 variable "game_code" {
   description = "모듈에서 정의하는 모든 리소스 이름의 prefix"

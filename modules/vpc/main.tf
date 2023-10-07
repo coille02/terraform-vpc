@@ -165,8 +165,6 @@ resource "aws_subnet" "q-sn-public" {
 resource "aws_subnet" "m-sn-public" {
   count = local.create_m_vpc ? length(var.m_public_subnets) : 0
 
-  # count = length(var.m_public_subnets)
-
   vpc_id                  = aws_vpc.m-vpc[0].id
   cidr_block              = var.m_public_subnets[count.index]
   availability_zone       = var.azs[count.index]
@@ -184,8 +182,6 @@ resource "aws_subnet" "m-sn-public" {
 # private subnet
 resource "aws_subnet" "r-sn-private" {
   count = local.create_r_vpc ? length(var.r_private_subnets) : 0
-
-  # count = length(var.r_private_subnets)
 
   vpc_id            = aws_vpc.r-vpc[0].id
   cidr_block        = var.r_private_subnets[count.index]
@@ -254,8 +250,6 @@ resource "aws_elasticache_subnet_group" "q-sn-redis" {
 resource "aws_eip" "nat" {
   count = local.create_r_vpc ? length(var.azs) : 0
 
-  # count = length(var.azs)
-
   vpc = true
 
   tags = merge(
@@ -270,12 +264,9 @@ resource "aws_eip" "nat" {
 resource "aws_nat_gateway" "r-ngw" {
   count = local.create_r_vpc ? length(var.azs) : 0
 
-  # count = length(var.azs)
 
   allocation_id = aws_eip.nat.*.id[count.index]
   subnet_id     = aws_subnet.r-sn-public.*.id[count.index]
-  #allocation_id = aws_eip.nat.id
-  #subnet_id     = aws_subnet.r-sn-public[0].id
 
   tags = merge(
     var.tags,
@@ -380,7 +371,6 @@ resource "aws_default_network_acl" "m_default" {
     to_port    = 0
   }
 
-  # subnet_ids = aws_subnet.m-sn-public.*.id
   subnet_ids = null
 
 
@@ -406,11 +396,6 @@ resource "aws_default_route_table" "q-rtb-public" {
     gateway_id = aws_internet_gateway.q_igw[0].id
   }
 
-  # route {
-  #   cidr_block                = aws_vpc.m-vpc.cidr_block
-  #   vpc_peering_connection_id = aws_vpc_peering_connection.m-to-q.id
-  # }
-
   tags = merge(
     var.tags,
     {
@@ -431,16 +416,6 @@ resource "aws_default_route_table" "m-rtb-public" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.m_igw[0].id
   }
-
-  # route {
-  #   cidr_block                = aws_vpc.q-vpc.cidr_block
-  #   vpc_peering_connection_id = aws_vpc_peering_connection.m-to-q.id
-  # }
-
-  # route {
-  #   cidr_block                = aws_vpc.r-vpc.cidr_block
-  #   vpc_peering_connection_id = aws_vpc_peering_connection.m-to-r.id
-  # }
 
   tags = merge(
     var.tags,
