@@ -1,5 +1,5 @@
 ﻿# terraform-vpc
-<img src="./제목 없는 다이어그램.drawio">
+<img src="./multi account vpc.png">
 사용법
 1. ./common 프로젝트 디렉토리 생성
 2. ./common/rnd/폴더를 복사하여 사용
